@@ -3,10 +3,13 @@ export const prerender = false;
 
 import Layout from '../../layouts/Layout.astro';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 const { username } = Astro.params;
 
 const response = await fetch(
-  `http://localhost:3001/profiles/${username}`
+  `${API_URL}/profiles/${username}`
 );
 
 const user = await response.json();
@@ -42,7 +45,7 @@ const images = user.PortfolioImages || [];
       <img
         src={
           profile?.profileImage
-            ? `http://localhost:3001/uploads/${profile.profileImage}`
+            ? `${API_URL}/uploads/${profile.profileImage}`
             : 'https://placehold.co/300x300'
         }
         alt={user.profileName}
@@ -162,7 +165,7 @@ const images = user.PortfolioImages || [];
           images.map((image: any) => (
 
             <img
-              src={`http://localhost:3001/uploads/${image.imageUrl}`}
+              src={`${API_URL}/uploads/${image.imageUrl}`}
               alt={image.title}
               class="
                 h-80

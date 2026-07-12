@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 export default function UploadProfilePhotoForm() {
 
   const [preview, setPreview] =
@@ -34,7 +37,7 @@ export default function UploadProfilePhotoForm() {
 
       const response = await fetch(
 
-        'http://localhost:3001/profile/photo',
+        `${API_URL}/profile/photo`,
 
         {
 

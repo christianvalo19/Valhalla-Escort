@@ -9,6 +9,9 @@ type Props = {
 
 };
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 export default function ProfileCard({
 
   username,
@@ -36,7 +39,7 @@ export default function ProfileCard({
       <img
         src={
           profileImage
-            ? `http://localhost:3001/uploads/${profileImage}`
+            ? `${API_URL}/uploads/${profileImage}`
             : 'https://placehold.co/600x400'
         }
         alt={profileName}

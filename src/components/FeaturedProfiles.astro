@@ -1,8 +1,13 @@
 ---
 import ProfileCard from './ProfileCard';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
+const dir = API_URL + '/profiles';
+
 const response = await fetch(
-  'http://localhost:3001/profiles'
+  dir
 );
 
 const profiles = await response.json();

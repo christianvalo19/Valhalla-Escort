@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 type City = {
 
   id: number;
@@ -59,7 +62,7 @@ export default function RegisterForm() {
       try {
 
         const response = await fetch(
-          'http://localhost:3001/cities'
+          '${API_URL}/cities'
         );
 
         const data =
@@ -94,7 +97,7 @@ export default function RegisterForm() {
     try {
 
       const response = await fetch(
-        'http://localhost:3001/auth/register',
+        `${API_URL}/auth/register`,
         {
 
           method: 'POST',

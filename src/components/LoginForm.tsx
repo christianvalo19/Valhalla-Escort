@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 export default function LoginForm() {
 
  const [login, setLogin] = useState('');
@@ -30,7 +33,7 @@ export default function LoginForm() {
     try {
 
       const response = await fetch(
-        'http://localhost:3001/auth/login',
+        `${API_URL}/auth/login`,
         {
 
           method: 'POST',

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+const API_URL =
+  import.meta.env.PUBLIC_API_URL;
+
 export default function UploadImageForm() {
 
   const [title, setTitle] =
@@ -49,7 +52,7 @@ export default function UploadImageForm() {
 
 
       const response = await fetch(
-        'http://localhost:3001/portfolio/upload',
+        `${API_URL}/portfolio/upload`,
         {
 
           method: 'POST',
