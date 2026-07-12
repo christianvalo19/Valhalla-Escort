@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import AccountSettings from '../../components/settings/AccountSettings';
+---
+
+<Layout title="Información personal">
+
+  <Navbar client:load />
+
+  <main class="pt-24">
+
+    <AccountSettings client:load />
+
+  </main>
+
+</Layout>

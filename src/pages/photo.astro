@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Navbar from '../components/Navbar';
+
+import ProtectedRoute from '../components/ProtectedRoute';
+
+import UploadProfilePhotoForm
+from '../components/UploadProfilePhotoForm';
+---
+
+<Layout title="Cambiar foto">
+
+  <ProtectedRoute client:load>
+
+    <Navbar client:load />
+
+    <section
+      class="
+        mx-auto
+        max-w-4xl
+        px-6
+        py-32
+      "
+    >
+
+      <UploadProfilePhotoForm client:load />
+
+    </section>
+
+  </ProtectedRoute>
+
+</Layout>

@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Catalogo from '../components/Catalog';
+---
+
+<Layout title="Catálogo">
+
+  <Navbar client:load/>
+
+  <main class="pt-24">
+
+    <Catalogo client:load/>
+
+  </main>
+
+</Layout>

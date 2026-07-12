@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import VerificationSettings from '../../components/settings/VerificationSettings';
+---
+
+<Layout title="Información personal">
+
+  <Navbar client:load />
+
+  <main class="pt-24">
+
+    <VerificationSettings client:load />
+
+  </main>
+
+</Layout>

@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Navbar from '../components/Navbar';
+
+import RegisterForm
+from '../components/RegisterForm';
+---
+
+<Layout title="Register">
+
+  <Navbar client:load />
+
+  <section
+    class="
+      px-6
+      py-20
+      bg-cover
+      bg-center
+      bg-fixed
+      relative
+      z-0
+    "
+
+    style="
+    background-image:
+    url('/assets/Valhalla 5.jpeg');
+  "
+  >
+  <div
+    class="
+      absolute
+      inset-0
+      bg-black/85
+    "
+  ></div>
+  <div  class="
+    relative
+    z-10
+  ">
+
+    <RegisterForm client:load />
+
+  </div>
+
+  </section>
+
+</Layout>

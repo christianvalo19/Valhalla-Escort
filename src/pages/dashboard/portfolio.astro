@@ -1,0 +1,34 @@
+---
+// src/pages/dashboard/portfolio.astro
+
+import Layout from '../../layouts/Layout.astro';
+
+import Navbar from '../../components/Navbar';
+
+import PortfolioManager from '../../components/PortfolioManager';
+
+import ProtectedRoute from '../../components/ProtectedRoute';
+---
+
+<Layout title="Portafolio">
+
+  <ProtectedRoute client:load>
+
+    <Navbar client:load />
+
+    <section
+      class="
+        px-6
+        py-20
+      "
+    >
+
+      <PortfolioManager
+        client:load
+      />
+
+    </section>
+
+  </ProtectedRoute>
+
+</Layout>

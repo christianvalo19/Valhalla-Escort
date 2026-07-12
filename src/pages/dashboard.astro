@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Navbar from '../components/Navbar';
+import ProtectedRoute from '../components/ProtectedRoute';
+
+import DashboardProfile from '../components/DashboardProfile';
+import MyPortfolio from '../components/MyPortfolio';
+---
+
+<Layout title="Dashboard">
+
+  <ProtectedRoute client:load>
+
+    <Navbar client:load />
+
+    <section
+      class="
+        px-6
+        pt-32
+        pb-16
+      "
+    >
+
+      <DashboardProfile client:load />
+
+    </section>
+
+    <MyPortfolio client:load />
+
+  </ProtectedRoute>
+
+</Layout>

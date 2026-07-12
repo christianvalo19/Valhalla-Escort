@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Navbar from '../components/Navbar';
+
+import LoginForm
+from '../components/LoginForm';
+---
+
+<Layout title="Login">
+
+  <Navbar client:load />
+
+  <section
+    class="
+    min-h-screen
+    px-6
+    pt-32
+    pb-20
+    bg-cover
+    bg-center
+    bg-fixed
+    relative
+  
+    "
+
+    style="
+    background-image:
+    url('/assets/Valhalla 5.jpeg');
+  "
+  >
+  <div
+    class="
+      absolute
+      inset-0
+      bg-black/85
+    "
+  ></div>
+
+  <div  class="
+    relative
+    z-10
+  ">
+
+    <LoginForm client:load />
+
+  </div>  
+
+  </section>
+
+</Layout>

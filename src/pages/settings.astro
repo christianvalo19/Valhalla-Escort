@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Settings from '../components/Settings/SettingsHome';
+---
+
+<Layout title="Configuración">
+
+  <Navbar client:load />
+
+  <main class="pt-24">
+
+    <Settings client:load />
+
+  </main>
+
+</Layout>

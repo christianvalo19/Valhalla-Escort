@@ -1,0 +1,184 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+
+const { username } = Astro.params;
+
+const response = await fetch(
+  `http://localhost:3001/profiles/${username}`
+);
+
+const user = await response.json();
+
+const profile = user.Profile;
+
+const images = user.PortfolioImages || [];
+---
+
+<Layout title={user.profileName}>
+
+  <section
+    class="
+      mx-auto
+      max-w-6xl
+      px-6
+      py-16
+    "
+  >
+
+    <!-- HEADER -->
+
+    <div
+      class="
+        flex
+        flex-col
+        gap-8
+        md:flex-row
+        md:items-center
+      "
+    >
+
+      <img
+        src={
+          profile?.profileImage
+            ? `http://localhost:3001/uploads/${profile.profileImage}`
+            : 'https://placehold.co/300x300'
+        }
+        alt={user.profileName}
+        class="
+          h-48
+          w-48
+          rounded-2xl
+          object-cover
+        "
+      />
+
+
+      <div>
+
+        <h1 class="text-5xl font-bold">
+          {user.profileName}
+        </h1>
+
+
+        <p class="mt-2 text-zinc-400">
+          {user.City?.name}
+        </p>
+
+
+        <p class="mt-6 max-w-2xl text-lg">
+          {profile?.description}
+        </p>
+
+
+        <!-- CONTACTO -->
+
+        <div
+          class="
+            mt-8
+            flex
+            flex-wrap
+            gap-4
+          "
+        >
+
+          {
+            profile?.whatsapp && (
+
+              <a
+                href={`https://wa.me/57${profile.whatsapp}`}
+                target="_blank"
+                class="
+                  rounded-xl
+                  px-5
+                  py-3
+                  font-semibold
+                "
+                style={{
+                  background:
+                    'var(--primary)'
+                }}
+              >
+                WhatsApp
+              </a>
+
+            )
+          }
+
+
+          {
+            profile?.instagram && (
+
+              <a
+                href={`https://instagram.com/${profile.instagram.replace('@', '')}`}
+                target="_blank"
+                class="
+                  rounded-xl
+                  border
+                  border-zinc-700
+                  px-5
+                  py-3
+                "
+              >
+                Instagram
+              </a>
+
+            )
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- GALERÍA -->
+
+    <div class="mt-20">
+
+      <h2
+        class="
+          mb-8
+          text-3xl
+          font-bold
+        "
+      >
+        Trabajos
+      </h2>
+
+
+      <div
+        class="
+          grid
+          gap-6
+          sm:grid-cols-2
+          lg:grid-cols-3
+        "
+      >
+
+        {
+          images.map((image: any) => (
+
+            <img
+              src={`http://localhost:3001/uploads/${image.imageUrl}`}
+              alt={image.title}
+              class="
+                h-80
+                w-full
+                rounded-2xl
+                object-cover
+              "
+            />
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+</Layout>

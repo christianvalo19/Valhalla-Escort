@@ -1,0 +1,51 @@
+---
+import ProfileCard from './ProfileCard';
+
+const response = await fetch(
+  'http://localhost:3001/profiles'
+);
+
+const profiles = await response.json();
+---
+
+<section class="px-6 py-16">
+
+  <h2
+    class="
+      mb-10
+      text-3xl
+      font-bold
+    "
+  >
+    Catálogo
+  </h2>
+
+
+  <div
+    class="
+      grid
+      gap-6
+      sm:grid-cols-2
+      lg:grid-cols-3
+    "
+  >
+
+    {
+      profiles.map((profile: any) => (
+
+        <ProfileCard
+          username={profile.username}
+          profileName={profile.profileName}
+          city={profile.City?.name}
+          profileImage={
+            profile.Profile?.profileImage
+          }
+          client:load
+        />
+
+      ))
+    }
+
+  </div>
+
+</section>

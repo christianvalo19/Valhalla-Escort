@@ -1,0 +1,29 @@
+---
+import Editprofile from "../../components/EditProfileForm.tsx";
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import ProtectedRoute from '../../components/ProtectedRoute';
+---
+
+<Layout title="Portafolio">
+
+  <ProtectedRoute client:load>
+
+    <Navbar client:load />
+
+    <section
+      class="
+        px-6
+        py-20
+      "
+    >
+
+      <Editprofile
+        client:load
+      />
+
+    </section>
+
+  </ProtectedRoute>
+
+</Layout>
