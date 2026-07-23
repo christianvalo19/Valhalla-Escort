@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import AdminSettings from '../../components/admin/AdminSettings';
+---
+
+<Layout title="Panel de administrador">
+
+  <Navbar client:load />
+
+  <main class="pt-24">
+
+    <AdminSettings client:load />
+
+  </main>
+
+</Layout>

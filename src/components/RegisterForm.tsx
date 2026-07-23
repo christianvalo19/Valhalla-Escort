@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 
+import InfoTooltip from './InfoToolTip';
+import {
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
+
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
 
@@ -27,6 +33,9 @@ export default function RegisterForm() {
 
   const [password, setPassword] =
     useState('');
+
+  const [showPassword, setShowPassword] =
+  useState(false);
 
   const [birthDate, setBirthDate] =
     useState('');
@@ -62,7 +71,7 @@ export default function RegisterForm() {
       try {
 
         const response = await fetch(
-          '${API_URL}/cities'
+          `${API_URL}/cities`
         );
 
         const data =
@@ -89,9 +98,28 @@ export default function RegisterForm() {
 
     e.preventDefault();
 
-    setLoading(true);
-
     setMessage('');
+
+    if (
+      !username.trim() ||
+      !profileName.trim() ||
+      !email.trim() ||
+      !password.trim() ||
+      !birthDate ||
+      !secretQuestion ||
+      !secretAnswer.trim() ||
+      !cityId
+    ) {
+
+      setMessage(
+        'Todos los campos son obligatorios.'
+      );
+
+      return;
+
+    }
+
+    setLoading(true);
 
 
     try {
@@ -143,7 +171,7 @@ export default function RegisterForm() {
 
 
       setMessage(
-        'Usuario creado 😄'
+        'Usuario creado exitosamente. Redirigiendo a la página de inicio de sesión...'
       );
 
 
@@ -195,7 +223,7 @@ export default function RegisterForm() {
       font-serif
       text-5xl
       tracking-[0.3em]
-      text-[#7a6200]
+      text-[#917712]
     "
   >
     REGÍSTRATE
@@ -211,7 +239,6 @@ export default function RegisterForm() {
       className="
         w-full
         border-collapse
-        text-center
       "
     >
 
@@ -222,7 +249,7 @@ export default function RegisterForm() {
           <th
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-6
               font-serif
               text-2xl
@@ -234,7 +261,7 @@ export default function RegisterForm() {
           <th
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-6
               font-serif
               text-2xl
@@ -247,7 +274,7 @@ export default function RegisterForm() {
           <th
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-6
               font-serif
               text-2xl
@@ -267,11 +294,12 @@ export default function RegisterForm() {
           <td
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-8
               text-xl
               leading-relaxed
               text-zinc-400
+              text-justify
             "
           >
 
@@ -282,11 +310,12 @@ export default function RegisterForm() {
           <td
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-8
               text-xl
               leading-relaxed
               text-zinc-400
+              text-justify
             "
           >
 
@@ -297,11 +326,12 @@ export default function RegisterForm() {
           <td
             className="
               border-2
-              border-pink-300
+              border-[#917712]
               p-8
               text-xl
               leading-relaxed
               text-zinc-400
+              text-justify
             "
           >
 
@@ -367,21 +397,55 @@ export default function RegisterForm() {
       <br></br>
 
 
-    <label
+    <div
+  className="
+    flex
+    items-center
+    gap-3
+  "
+>
+
+  <label
+
     className="
       text-xs
       uppercase
       tracking-[0.3em]
       text-zinc-500
     "
-    >
-    Nombre de usuario:
-    </label>
+
+  >
+
+    Nombre de usuario: 
+
+  </label>
+
+  <InfoTooltip>
+
+    <p className="font-semibold">
+
+      ¿Qué es el nombre de usuario?
+
+    </p>
+
+    <p className="mt-2">
+
+      Es un nombre privado que únicamente utilizarás para iniciar sesión en Valhalla.
+
+      <br /><br />
+
+      Tu nombre público será el <strong>Nombre de perfil</strong>, que es el que verán los clientes.
+
+    </p>
+
+  </InfoTooltip>
+
+</div>
 
       <input
         type="text"
         placeholder="Ingrese su nombre de usuario"
-
+        required
         value={username}
 
         onChange={(e) =>
@@ -404,19 +468,54 @@ export default function RegisterForm() {
       <br></br>
 
 
-      <label
-        className="
-          text-xs
-          uppercase
-          tracking-[0.3em]
-          text-zinc-500
-        "
-      >
-        Nombre de perfil:
-      </label>
+       <div
+  className="
+    flex
+    items-center
+    gap-3
+  "
+>
+
+  <label
+
+    className="
+      text-xs
+      uppercase
+      tracking-[0.3em]
+      text-zinc-500
+    "
+
+  >
+
+    Nombre de perfil: 
+
+  </label>
+
+  <InfoTooltip>
+
+    <p className="font-semibold">
+
+      ¿Qué es el nombre de perfil?
+
+    </p>
+
+    <p className="mt-2">
+
+      Es el nombre que los clientes verán cuando te busquen en Valhalla.
+
+      <br /><br />
+
+      Podrás cambiarlo en cualquier momento.
+
+    </p>
+
+  </InfoTooltip>
+
+</div>
       <input
         type="text"
         placeholder="Ingrese su nombre de perfil"
+        required
 
         value={profileName}
 
@@ -453,7 +552,7 @@ export default function RegisterForm() {
       <input
         type="email"
         placeholder="Ingrese su correo electrónico"
-
+        required
         value={email}
 
         onChange={(e) =>
@@ -484,11 +583,11 @@ export default function RegisterForm() {
     >
     Contraseña:
     </label>
-
+<div className="relative">
       <input
-        type="password"
+        type={showPassword ? "text" : "password"}
         placeholder="Ingrese su contraseña"
-
+        required
         value={password}
 
         onChange={(e) =>
@@ -498,17 +597,49 @@ export default function RegisterForm() {
         }
 
         className="
+        w-full
           border-b
-      border-zinc-700
-      bg-transparent
-      py-1
-      text-lg
-      outline-none
-      transition
-      focus:border-white
-    "
+        border-zinc-700
+        bg-transparent
+        py-1
+        text-lg
+        outline-none
+        transition
+        focus:border-white
+      "
         
       />
+
+      <button
+    type="button"
+
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+
+    className={`
+      absolute
+      right-0
+      top-1/2
+      -translate-y-1/2
+      transition
+      ${
+        password
+          ? "text-yellow-400"
+          : "text-zinc-500"
+      }
+      hover:text-yellow-300
+    `}
+  >
+
+    {
+      showPassword
+        ? <EyeSlashIcon className="h-5 w-5" />
+        : <EyeIcon className="h-5 w-5" />
+    }
+
+  </button>
+</div>
        <br></br>
       <label
       className="
@@ -523,7 +654,7 @@ export default function RegisterForm() {
 
       <input
         type="date"
-
+        required
         value={birthDate}
 
         onChange={(e) =>
@@ -559,7 +690,7 @@ export default function RegisterForm() {
       <select
 
   value={secretQuestion}
-
+  required
   onChange={(e) =>
     setSecretQuestion(
       e.target.value
@@ -635,6 +766,7 @@ export default function RegisterForm() {
       <input
         type="text"
         placeholder="Respuesta secreta"
+        required
 
         value={secretAnswer}
 
@@ -669,7 +801,7 @@ export default function RegisterForm() {
       <select
 
         value={cityId}
-
+        required
         onChange={(e) =>
           setCityId(
             e.target.value
@@ -920,7 +1052,7 @@ showPolicy && (
 
     <p className="text-zinc-300">
 
-      Tu información de verificación es privada y nunca será visible para otros usuarios. La utilizamos únicamente para validar identidad, confirmar mayoría de edad y fortalecer la seguridad de la comunidad. Por ende al subir tu selfi con cedula tu perfil es automáticamente verificado
+      Tu información de verificación es privada y nunca será visible para otros usuarios. La utilizamos únicamente para validar identidad, confirmar mayoría de edad y fortalecer la seguridad de la comunidad. Por ende al subir tu selfie con cédula, tu perfil es automáticamente verificado
 
     </p>
 

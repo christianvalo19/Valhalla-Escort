@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { ArrowUpTrayIcon } from "@heroicons/react/24/outline";
+
+
 
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
@@ -97,27 +100,61 @@ export default function UploadProfilePhotoForm() {
       </h1>
 
       <input
-        type="file"
+  id="profile-image"
+  type="file"
+  accept="image/*"
+  className="hidden"
+  onChange={(e) => {
+    const selectedFile = e.target.files?.[0];
 
-        accept="image/*"
+    if (!selectedFile) return;
 
-        onChange={(e) => {
+    setFile(selectedFile);
 
-  const selectedFile =
-    e.target.files?.[0];
+    setPreview(
+      URL.createObjectURL(selectedFile)
+    );
+  }}
+/>
+<label
+        htmlFor="profile-image"
+        className="
+          flex
+          cursor-pointer
+          flex-col
+          items-center
+          justify-center
+          rounded-3xl
+          border-2
+          border-dashed
+          border-zinc-700
+          bg-zinc-900
+          p-12
+          transition
+          hover:border-[var(--primary)]
+        "
 
-  if (!selectedFile) return;
+      >
 
-  setFile(selectedFile);
+        <div className="text-6xl">
 
-  setPreview(
-    URL.createObjectURL(
-      selectedFile
-    )
-  );
+          <ArrowUpTrayIcon className="h-12 w-12" />
 
-}}
-      />
+        </div>
+
+        <p className="mt-4">
+
+          Haz clic para subir tu foto de perfil.
+
+        </p>
+
+        <p className="text-sm text-zinc-500">
+
+          JPG • PNG • WEBP
+
+        </p>
+  
+</label>
       {
   preview && (
 

@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import {
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
+
+
 
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
@@ -18,7 +24,9 @@ export default function LoginForm() {
 
   const [showRecoveryModal, setShowRecoveryModal] =
     useState(false);
-
+  
+  const [showPassword, setShowPassword] =
+  useState(false);
 
   const handleSubmit = async (
     e: React.FormEvent
@@ -57,6 +65,8 @@ export default function LoginForm() {
       const data = await response.json();
 
 
+
+
       if (!response.ok) {
 
         setError(
@@ -81,8 +91,10 @@ localStorage.setItem(
 
 localStorage.setItem(
   'role',
-  data.role
+  data.user.role
 );
+
+console.log("Role guardado:", localStorage.getItem("role"));
 
 // redireccionar
 
@@ -166,9 +178,9 @@ if (data.user.role === 'admin') {
   "
 />
 
-
+<div className="relative">
       <input
-        type="password"
+        type={showPassword ? "text" : "password"}
         placeholder="Contraseña"
 
         value={password}
@@ -186,8 +198,40 @@ if (data.user.role === 'admin') {
       outline-none
       transition
       focus:border-white
+      w-full
     "
       />
+    <button
+    type="button"
+
+    onClick={() =>
+      setShowPassword(!showPassword)
+    }
+
+    className={`
+      absolute
+      right-0
+      top-1/2
+      -translate-y-1/2
+      transition
+      ${
+        password
+          ? "text-yellow-400"
+          : "text-zinc-500"
+      }
+      hover:text-yellow-300
+    `}
+  >
+
+    {
+      showPassword
+        ? <EyeSlashIcon className="h-5 w-5" />
+        : <EyeIcon className="h-5 w-5" />
+    }
+
+  </button>
+
+      </div>
 
 
       {

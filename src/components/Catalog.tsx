@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import VerifiedBadge from './VerifiedBadge';
 
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
@@ -24,7 +25,6 @@ export default function Catalog() {
 const loadCities = async () => {
 
   try {
-
     const response =
       await fetch(
         `${API_URL}/cities`
@@ -60,8 +60,12 @@ const loadProfiles = async (
 
       );
 
-    const data =
-      await response.json();
+  
+
+    const data = await response.json();
+
+    
+
 
     setProfiles(data);
 
@@ -269,15 +273,29 @@ return (
               >
 
                 <h2
-                  className="
-                    font-serif
-                    text-2xl
-                  "
-                >
-                  {
-                    profile.profileName
+
+                className="
+                  flex
+                  items-center
+                  gap-3
+                  font-serif
+                  text-2xl
+                "
+
+              >
+
+                {profile.profileName}
+
+                <VerifiedBadge
+
+                  verified={
+                    profile.verificationStatus ===
+                    'approved'
                   }
-                </h2>
+
+                />
+
+              </h2>
 
                 <p
                   className="
@@ -377,14 +395,31 @@ return (
           <div>
 
             <h2
-              className="
-                mb-4
-                font-serif
-                text-5xl
-              "
-            >
-              {selectedProfile.profileName}
-            </h2>
+
+            className="
+              mb-4
+              flex
+              items-center
+              gap-4
+              font-serif
+              text-5xl
+            "
+
+          >
+
+            {selectedProfile.profileName}
+
+            <VerifiedBadge
+
+              verified={
+                selectedProfile
+                  .verificationStatus ===
+                'approved'
+              }
+
+            />
+
+          </h2>
 
             <p
               className="

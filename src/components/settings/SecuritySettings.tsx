@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+import {
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
+
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
 
@@ -13,6 +18,15 @@ export default function SecuritySettings() {
 
   const [confirmPassword, setConfirmPassword] =
     useState('');
+
+  const [showCurrent, setShowCurrent] =
+  useState(false);
+
+  const [showNew, setShowNew] =
+    useState(false);
+
+  const [showConfirm, setShowConfirm] =
+    useState(false);
 
   const [message, setMessage] =
     useState('');
@@ -67,7 +81,7 @@ export default function SecuritySettings() {
 
     ) {
 
-      return {
+      return {  
 
         text: 'Media',
 
@@ -235,10 +249,10 @@ export default function SecuritySettings() {
       >
         Protege tu cuenta utilizando una contraseña segura.
       </p>
-
+<div className="relative">
       <input
 
-        type="password"
+        type={showCurrent ? "text" : "password"}
 
         placeholder="Contraseña actual"
 
@@ -251,6 +265,7 @@ export default function SecuritySettings() {
         }
 
         className="
+          w-full
           rounded-xl
           border
           border-zinc-700
@@ -260,10 +275,37 @@ export default function SecuritySettings() {
         "
 
       />
+      <button
 
+        type="button"
+
+        onClick={() => setShowCurrent(!showCurrent)}
+
+        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 transition hover:text-white"
+
+    >
+
+        {
+
+            showCurrent
+
+            ?
+
+            <EyeSlashIcon className="h-5 w-5" />
+
+            :
+
+            <EyeIcon className="h-5 w-5" />
+
+        }
+
+    </button>
+</div>
+
+<div className='relative'>
       <input
 
-        type="password"
+        type={showNew ? "text" : "password"}
 
         placeholder="Nueva contraseña"
 
@@ -276,6 +318,7 @@ export default function SecuritySettings() {
         }
 
         className="
+          w-full
           rounded-xl
           border
           border-zinc-700
@@ -285,10 +328,38 @@ export default function SecuritySettings() {
         "
 
       />
+      <button
+
+        type="button"
+
+        onClick={() => setShowNew(!showNew)}
+
+        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 transition hover:text-white"
+
+    >
+
+        {
+
+            showNew
+
+            ?
+
+            <EyeSlashIcon className="h-5 w-5" />
+
+            :
+
+            <EyeIcon className="h-5 w-5" />
+
+        }
+
+    </button>
+
+</div>
+<div className='relative'>
 
       <input
 
-        type="password"
+        type={showConfirm ? "text" : "password"}
 
         placeholder="Confirmar contraseña"
 
@@ -301,6 +372,7 @@ export default function SecuritySettings() {
         }
 
         className="
+          w-full
           rounded-xl
           border
           border-zinc-700
@@ -310,7 +382,32 @@ export default function SecuritySettings() {
         "
 
       />
+      <button
 
+        type="button"
+
+        onClick={() => setShowConfirm(!showConfirm)}
+
+        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 transition hover:text-white"
+
+    >
+
+        {
+
+            showConfirm
+
+            ?
+
+            <EyeSlashIcon className="h-5 w-5" />
+
+            :
+
+            <EyeIcon className="h-5 w-5" />
+
+        }
+
+    </button>
+</div>
       {
 
         newPassword && (

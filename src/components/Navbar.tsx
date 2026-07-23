@@ -35,20 +35,30 @@ export default function Navbar() {
   const [isLogged, setIsLogged] =
     useState(false);
 
+  const [role, setRole] =
+  useState('');
+
 
   useEffect(() => {
 
-    const token =
-      localStorage.getItem('token');
+  const token =
+    localStorage.getItem('token');
 
-    setIsLogged(!!token);
+  const userRole =
+    localStorage.getItem('role');
 
-  }, []);
+  setIsLogged(!!token);
+
+  setRole(userRole || '');
+
+
+}, []);
 
 
   const handleLogout = () => {
 
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
 
     window.location.href = '/';
 
@@ -122,7 +132,39 @@ export default function Navbar() {
 >
 
   {
+    
+    
     isLogged ? (
+
+  role === 'admin' ? (
+    <>
+  <a
+    href="/admin"
+    className="
+      text-sm
+      font-medium
+    ">
+    Panel de administración
+  </a>
+  <a
+    href="/admin/settings"
+    className="
+      text-sm
+      font-medium
+    ">
+    Configuración
+  </a>
+  <button
+    onClick={handleLogout}
+    className="
+      text-sm
+      text-zinc-400
+      hover:text-white
+    ">
+    Salir
+  </button>
+
+</>) : (
 
       <>
         <a
@@ -160,12 +202,17 @@ export default function Navbar() {
             handleLogout();
 
           }}
+          className="
+            text-sm
+            text-zinc-400
+            hover:text-white
+          "
         >
           Salir
         </button>
       </>
-
-    ) : (
+    )
+  ) : (
 
       <>
         <button
@@ -210,19 +257,39 @@ export default function Navbar() {
       {/* logo */}
 
       <a
-        href={
-          isLogged
-            ? '/catalog'
-            : '/'
-        }
+  href={
+    isLogged
+      ? '/catalog'
+      : '/'
+  }
+  className="
+    flex
+    items-center
+    gap-3
+  "
+>
+  <img
+    src="/assets/logo2.png"
+    alt="Logo"
+    className="h-12 w-12"
+  />
 
-        className="        
-          leading-tight
+  {
+    role === 'admin' && (
+      <span
+        className="
+          text-xs
+          font-serif
+          uppercase
           tracking-[0.2em]
+          text-yellow-400
         "
       >
-        <img src="/assets/logo2.png" alt="Logo" className="h-12 w-12" />
-      </a>
+        Administrador
+      </span>
+    )
+  }
+</a>
 
       <div
   className="
@@ -233,24 +300,6 @@ export default function Navbar() {
   "
 >
 
-  <a
-    href="/catalog"
-    className="
-      rounded-xl
-      border
-      border-white/20
-      bg-[#7a6200]
-      px-4
-      py-2
-      text-[10px]
-      font-semibold
-      uppercase
-      tracking-[0.2em]
-      text-white
-    "
-  >
-    Catálogo
-  </a>
 
   <button
   onClick={() =>
@@ -283,7 +332,46 @@ export default function Navbar() {
       >
 
         {
-          isLogged ? (
+          
+  isLogged ? (
+
+    role === 'admin' ? (
+      <>
+
+  <a
+    href="/admin"
+    onClick={() =>
+      setIsMenuOpen(false)
+    }
+  >
+    Panel de administración
+  </a>
+  <a
+    href="/admin/settings"
+    className="
+      text-sm
+      font-medium
+    ">
+    Configuración
+  </a>
+
+  <button
+    onClick={() => {
+
+      setIsMenuOpen(false);
+
+      handleLogout();
+
+    }}
+    className="
+    text-zinc-400
+    hover:text-white
+    transition
+    "
+  >
+    Salir
+  </button>
+</>) : (
 
             <>
               
@@ -316,6 +404,7 @@ export default function Navbar() {
                 className="
                   text-sm
                   text-zinc-400
+                  hover:text-white
                 "
               >
                 Salir
@@ -323,7 +412,7 @@ export default function Navbar() {
 
             </>
 
-          ) : (
+          )) : (
 
             <>
             <button

@@ -1,3 +1,7 @@
+---
+import ContactIcon from '../components/contactIcon.astro';
+---
+
 <section
   id="contact"
 
@@ -15,7 +19,7 @@
       text-m
       uppercase
       tracking-[0.5em]
-      text-zinc-400
+      text-yellow-400
     "
   >
     Contacto:
@@ -45,20 +49,150 @@
     md:flex-row">
     <div class="flex-1">
 
-  <p
+  <div
+  class="
+    mt-10
+    flex
+    items-center
+    gap-5
+  "
+>
+
+
+
+  <div class="mt-12 space-y-6">
+
+  <a
+
+    href="https://wa.me/573502079446"
+
+    target="_blank"
+
     class="
-      mt-10
-      max-w-3xl
-      text-lg
-      leading-relaxed
-      text-zinc-400
+      group
+      flex
+      items-center
+      gap-5
+
+      rounded-2xl
+
+      border
+      border-zinc-800
+
+      bg-zinc-950
+
+      p-5
+
+      transition-all
+      duration-300
+
+      hover:border-[#c59630]
+      hover:bg-zinc-900
     "
+
   >
-    Whatsapp: 323  648 9454 <br />
-    Correo electrónico: valhallaescort@gmail.com
-  </p>
+
+    <ContactIcon type="whatsapp" />
+
+    <div>
+
+      <p
+        class="
+          text-sm
+          uppercase
+          tracking-widest
+          text-zinc-500
+        "
+      >
+
+        WhatsApp
+
+      </p>
+
+      <p
+        class="
+          text-lg
+          transition
+          group-hover:text-white
+        "
+      >
+
+        350 207 9446
+
+      </p>
+
+    </div>
+
+  </a>
+
+  <a
+
+    href="mailto:valhallaescortcolombia@gmail.com"
+
+    class="
+      group
+      flex
+      items-center
+      gap-5
+
+      rounded-2xl
+
+      border
+      border-zinc-800
+
+      bg-zinc-950
+
+      p-5
+
+      transition-all
+      duration-300
+
+      hover:border-[#c59630]
+      hover:bg-zinc-900
+    "
+
+  >
+
+    <ContactIcon type="email" />
+
+    <div>
+
+      <p
+        class="
+          text-sm
+          uppercase
+          tracking-widest
+          text-zinc-500
+        "
+      >
+
+        Correo electrónico
+
+      </p>
+
+      <p
+        class="
+          text-lg
+          break-all
+          transition
+          group-hover:text-white
+        "
+      >
+
+        valhallaescortcolombia@gmail.com
+
+      </p>
+
+    </div>
+
+  </a>
 
 </div>
+
+</div>
+
+</div>
+
     <div class="flex-1 overflow-hidden rounded-lg">
       <img
         src="/assets/contactanos.jpeg"

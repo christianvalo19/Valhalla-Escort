@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 const API_URL =
   import.meta.env.PUBLIC_API_URL;
 
+import VerifiedBadge from './VerifiedBadge';
+
 export default function DashboardProfile() {
 
   const [profile, setProfile] =
@@ -242,16 +244,38 @@ setProfile(data);
         {/* derecha */}
 
         <div>
+                
+          <div
+  className="
+    mb-6
+    flex
+    items-center
+    gap-3
+  "
+>
 
-          <h2
-            className="
-              mb-6
-              font-serif
-              text-6xl
-            "
-          >
-            {profile?.User?.profileName}
-          </h2>
+  <h2
+    className="
+      font-serif
+      text-6xl
+    "
+  >
+
+    {profile?.User?.profileName}
+
+  </h2>
+
+  <VerifiedBadge
+
+    verified={
+      profile?.User?.verificationStatus ===
+      'approved'
+    }
+
+  />
+
+</div>
+          
 
 
           <div
