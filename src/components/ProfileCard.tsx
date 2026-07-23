@@ -24,7 +24,7 @@ export default function ProfileCard({
   return (
 
     <a
-      href={`/profile/${username}`}
+      href={`/profile?username=/${username}`}
       className="
         rounded-2xl
         overflow-hidden
